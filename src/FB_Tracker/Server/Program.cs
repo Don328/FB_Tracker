@@ -1,7 +1,16 @@
+using FB_Tracker.Server;
+using FB_Tracker.Server.Controllers;
+using FB_Tracker.Server.Data;
+using FB_Tracker.Shared.Entities;
+using FB_Tracker.Shared.Entities.GameElements.PlayTypes;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<AppState>();
+builder.Services.AddSingleton<FBTDataContext>();
+
+builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 

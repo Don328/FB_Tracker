@@ -1,0 +1,93 @@
+﻿@page "/"
+
+<div class="page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-dark" type="button" @onclick=ShowSelectSeason>
+                    @if (_viewMode == ViewMode.NoSeason ||
+                        _viewMode == ViewMode.Empty)
+                    {
+                        <span>
+                            Select Season
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            Change Season
+                        </span>
+                    }
+                </button>
+            </div>
+            @if (_viewMode == ViewMode.NoSeason)
+            {
+                <div class="col-rev">
+                    <a class="notice" @onclick=ShowSelectSeason>
+                        <span>Please select a season</span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="col-rev">
+                    <h2>@_selectedSeason</h2>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1 class="title">Welcome to Football Tracker</h1>
+            </div>
+        </div>
+        @if (_showSelectSeason)
+        {
+            <SeasonSelect Model=_seasonSelectModel
+                          OnSeasonSelected=SetSelectedSeason
+                          OnCancel=HideSelectSeason />
+            @if (_seasonSelectModel.Season is not null)
+            {
+                <span class="warning">
+                    Changing the selected season will remove any unsaved data added to the current season
+                </span>
+            }
+        }
+
+        @if(_viewMode == ViewMode.TeamsView)
+        {
+            <TeamListView 
+                Teams=_teams
+                OnUserValidated=OnTeamsAccepted/>
+            @if(_teams.Count < 1)
+            {
+                <div class="row grouped-row">
+                    <label class="warning">The Teams list is empty. Load last seasons teams?</label>
+                    <button type="button" class="btn btn-dark" @onclick=LoadPrevSeasonTeams>Load</button>
+                 
+                    <!--Need a destination for canceling the teams list import
+                        possibly zeroing out the current season or envoking a
+                        Team input form -->
+                    <button type="button" class="btn btn-cancel">Cancel</button>
+
+                </div>
+                <span class="notice">You will be able to edit any changes to team</span>
+                <span class="notice">details before submitting statistical data.</span>
+            }
+        }
+
+        @if (_viewMode == ViewMode.SeasonView)
+        {
+            <div class="row">
+                <div class="col col-rh">
+                    <button type="button" class="btn btn-dark">Add Game Data</button>
+                    <button type="button" class="btn btn-dark">Edit Game Data</button>
+                    <button type="button" class="btn btn-dark">Input Schedules</button>
+                    <button type="button" class="btn btn-dark">Edit Player Data</button>
+                    <button type="button" class="btn btn-dark" @onclick=ViewTeamsList>Edit Team Data</button>
+                    <button type="button" class="btn btn-dark">View Statistics</button>
+                </div>
+                <div class="container"></div>
+            </div>
+        }
+    </div>
+</div>

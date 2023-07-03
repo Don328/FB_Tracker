@@ -1,0 +1,191 @@
+﻿<div class="container">
+    @if (Teams.Count() > 0)
+    {
+        <div class="row">
+            <div class="col col-stack outlined">
+                <div class="row grouped-row">
+                    <label>32 Teams</label>
+                    @if (_teamsEqual32)
+                    {
+                        <h4 class="check-mark">✓</h4>
+                    }
+                    else
+                    {
+                        <h4 class="incomplete">X</h4>
+                    }
+                </div>
+            </div>
+            <div class="col col-stack outlined">
+                <div class="row grouped-row">
+                    <label>16 Teams per Conference</label>
+                    @if (_validConfs)
+                    {
+                        <h4 class="check-mark">✓</h4>
+                    }
+                    else
+                    {
+                        <h4 class="incomplete">X</h4>
+                    }
+                </div>
+            </div>
+            <div class="col col-stack outlined">
+                <div class="row grouped-row">
+                    <label>4 Teams per Division</label>
+                    @if (_validDivs)
+                    {
+                        <h4 class="check-mark">✓</h4>
+                    }
+                    else
+                    {
+                        <h4 class="incomplete">X</h4>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-stack">
+                <div class="row grouped-row">
+                    @if (_userValidation)
+                    {
+                        <h4 class="check-mark">✓</h4>
+                        <button>View Season</button>
+                    }
+                    else
+                    {
+                            <div class="row grouped-row">
+                        @if(_teamsEqual32 &&
+                            _validConfs &&
+                            _validDivs)
+                        {
+                                <label class="notice">Check that all team Data is accurate</label>
+                                <button type="button" class="btn btn-dark" @onclick=UserValidateTeams>Accept Team Data</button>
+                        }
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    @if(_viewMode != ViewMode.All)
+                    {
+                        <button type="button" class="btn btn-dark" @onclick=ShowAll>All</button>
+                    }
+                    @if(_viewMode != ViewMode.ByConference)
+                    {
+                        <button type="button" class="btn btn-dark" @onclick=ShowConferences>By Conference</button>
+                    }
+                    @if(_viewMode != ViewMode.ByDivision)
+                    {
+                        <button type="button" class="btn btn-dark" @onclick=ShowDivisions>By Division</button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if (_viewMode == ViewMode.All)
+    {
+        <div class="col">
+            @foreach (var team in Teams)
+            {
+                <TeamView Team=team />
+            }
+        </div>
+    }
+
+    @if (_viewMode == ViewMode.ByConference)
+    {
+        <div class="row">
+            <div class="col">
+                <h3>AFC</h3>
+                @foreach (var team in _afcTeams)
+                {
+                    <TeamView Team="team" />
+                }
+            </div>
+            <div class="col">
+                <h3>NFC</h3>
+                @foreach (var team in _nfcTeams)
+                {
+                    <TeamView Team="team" />
+                }
+            </div>
+        </div>
+    }
+
+
+    @if (_viewMode == ViewMode.ByDivision)
+    {
+        <div class="row">
+            <h3>AFC</h3>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>North</h4>
+                @foreach (var team in _afcNorth)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+            <div class="col">
+                <h4>South</h4>
+                @foreach (var team in _afcSouth)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>East</h4>
+                @foreach (var team in _afcEast)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+            <div class="col">
+                <h4>West</h4>
+                @foreach (var team in _afcWest)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+        </div>
+        <div class="row">
+            <h3>NFC</h3>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>North</h4>
+                @foreach (var team in _nfcNorth)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+            <div class="col">
+                <h4>South</h4>
+                @foreach (var team in _nfcSouth)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>East</h4>
+                @foreach (var team in _nfcEast)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+            <div class="col">
+                <h4>West</h4>
+                @foreach (var team in _nfcWest)
+                {
+                    <TeamView Team=team />
+                }
+            </div>
+        </div>
+    }
+</div>

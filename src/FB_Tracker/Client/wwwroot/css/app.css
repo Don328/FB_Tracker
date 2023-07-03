@@ -1,5 +1,133 @@
+:root {
+    /* Color Pallet */
+    --primary-bg-color: #4f4f4f;
+    --primary-font-color: #C8C8C8;
+    --btn-dark-bg: #202020;
+    --btn-dark-fg: #8D8D8D;
+    --btn-dark-hov: #373737;
+    --hilite-color: #869f56;
+    --warning-color: #E7911D;
+    --check-mark:#21c74d;
+    --incomplete:#f14545;
+}
+
+
+body{
+    background: var(--primary-bg-color);
+    color: var(--primary-font-color);
+}
+
+.page {
+    padding: 1rem 5rem;
+}
+
+.container {
+    display:flex;
+    width:100%;
+    height:contain;
+    padding:.5rem;
+    flex-direction:column;
+}
+
+.row {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    padding:.5rem 0 .5rem 0;
+}
+
+.row-rev {
+    display:flex;
+    flex-direction:row-reverse;
+}
+
+.grouped-row {
+    align-items:center;
+}
+
+.grouped-row label {
+    padding-right:1rem;
+}
+
+.grouped-row button {
+    margin:.2rem;
+}
+
+.col {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    padding:0 .5rem 0 .5rem;
+}
+
+.col-rev {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 0 .5rem 0 .5rem;
+}
+
+.col-rh {
+    align-items:end;
+    width:max-content;
+}
+
+.col-stack {
+    width:fit-content;
+}
+
+.title {
+    align-content:center;
+    align-self:center;
+}
+
+.notice {
+    color: var(--hilite-color);
+}
+
+.warning {
+    color: var(--warning-color);
+}
+
+.check-mark {
+    color: var(--check-mark);
+}
+
+.incomplete {
+    color: var(--incomplete);
+}
+
+.outlined {
+    border-color:var(--btn-dark-hov);
+    border-style:solid;
+    border-width:.2rem;
+    border-radius:3rem;
+}
+
 h1:focus {
     outline: none;
+}
+
+.btn {
+    width: fit-content;
+    padding: .4rem .6rem .3rem .5rem;
+    border-radius: .5rem;
+}
+
+.btn-dark {
+    background: var(--btn-dark-bg);
+    color: var(--btn-dark-fg);
+    font-size: small;
+    font-weight: bold;
+}
+
+.btn-dark:hover {
+    background: var(--btn-dark-hov);
+}
+
+.btn-cancel {
+    background: var(--btn-dark-fg);
+    color: var(--btn-dark-bg);
 }
 
 #blazor-error-ui {
